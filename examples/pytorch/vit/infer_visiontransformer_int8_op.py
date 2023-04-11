@@ -46,7 +46,8 @@ def setup(args):
     config = CONFIGS[args.model_type]
     print(config)
 
-    num_classes = 1000 if args.dataset == "ImageNet" else 100
+    # num_classes = 1000 if args.dataset == "ImageNet" else 100
+    num_classes = 5
 
     model = VisionTransformerINT8(config, args.img_size, zero_head=False, num_classes=num_classes)
     model.load_state_dict(torch.load(args.calibrated_dir))
