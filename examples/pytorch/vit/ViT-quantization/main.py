@@ -203,10 +203,12 @@ def calib(args, config, model):
 def train(args, config):
     if CALIBRATION:
         num_classes = 1000
+        model_config = CONFIGS[args.model_type]
+        model = VisionTransformerINT8(model_config, args.img_size, zero_head=False, num_classes=num_classes)
     else:
         num_classes = 5
-    model_config = CONFIGS[args.model_type]
-    model = VisionTransformerINT8(model_config, args.img_size, zero_head=False, num_classes=num_classes)
+        model_config = CONFIGS[args.model_type]
+        model = VisionTransformerINT8(model_config, args.img_size, zero_head=True, num_classes=num_classes)
     model_ckpt = torch.load(args.pretrained_dir, map_location="cpu")
     model.load_state_dict(model_ckpt["model"] if "model" in model_ckpt else model_ckpt, strict=False)
     model.cuda()
