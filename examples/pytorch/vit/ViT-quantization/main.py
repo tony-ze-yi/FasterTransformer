@@ -321,7 +321,7 @@ def train(args, config):
                     "EPOCH [%d/%d] (%d / %d Steps) (loss=%2.5f) (lr=%.7f)" % 
                         (epoch_i, args.num_epochs, global_step, len(epoch_iterator), losses.val, lr)
                 )
-        
+        print(torch.cuda.memory_stats(args.device))
         if args.local_rank in [-1, 0]:
             accuracy = valid(args, config, model, test_loader)
             if best_acc < accuracy:
