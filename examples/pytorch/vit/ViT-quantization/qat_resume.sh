@@ -2,7 +2,7 @@ python -m torch.distributed.launch --nproc_per_node 1 \
     --master_port 12345 main.py \
     --train \
     --name vit \
-    --pretrained_dir calib-checkpoint/R50-ViT-B_16_calib.pth \
+    --pretrained_dir output/vit_checkpoint.bin \
     --data-path $DATA_DIR \
     --model_type R50-ViT-B_16 \
     --quant-mode ft2 \
