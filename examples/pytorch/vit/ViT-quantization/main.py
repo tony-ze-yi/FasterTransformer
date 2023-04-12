@@ -43,7 +43,7 @@ from vit_int8 import VisionTransformerINT8
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-CALIBRATION = True
+CALIBRATION = False
 
 class AverageMeter(object):
     """Computes and stores the average and current value"""
@@ -100,13 +100,13 @@ def setup(args):
     config = CONFIGS[args.model_type]
     if CALIBRATION:
         num_classes = 10 if args.dataset == "cifar10" else 1000
+        model = VisionTransformerINT8(config, args.img_size, zero_head=False, num_classes=num_classes)
     else:
         num_classes = 5
+        # zero_head is set to true here as we are shaping the head to be custom classes (not 1000)
+        model = VisionTransformerINT8(config, args.img_size, zero_head=True, num_classes=num_classes)
     
-
-    model = VisionTransformerINT8(config, args.img_size, zero_head=False, num_classes=num_classes)
     # uncomment this and uncomment the above line when calibrating
-    # model = VisionTransformerINT8(config, args.img_size, zero_head=False)
     model.load_from(np.load(args.pretrained_dir))
     model.to(args.device)
     num_params = count_parameters(model)
@@ -208,7 +208,8 @@ def train(args, config):
     else:
         num_classes = 5
         model_config = CONFIGS[args.model_type]
-        model = VisionTransformerINT8(model_config, args.img_size, zero_head=True, num_classes=num_classes)
+        # zero_head set to false here as we assume that the calibrated model is with 5 classes
+        model = VisionTransformerINT8(model_config, args.img_size, zero_head=False, num_classes=num_classes)
     model_ckpt = torch.load(args.pretrained_dir, map_location="cpu")
     model.load_state_dict(model_ckpt["model"] if "model" in model_ckpt else model_ckpt, strict=False)
     model.cuda()
