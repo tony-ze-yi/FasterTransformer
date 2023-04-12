@@ -277,6 +277,7 @@ def train(args, config):
     losses = AverageMeter()
     global_step, best_acc = 0, 0
     quant_utils.configure_model(model, args, calib=False)
+    torch.cuda.empty_cache()
     for epoch_i in range(args.num_epochs):
         model.train()
         epoch_iterator = tqdm(train_loader,
