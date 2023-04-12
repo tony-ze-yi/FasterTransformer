@@ -101,6 +101,8 @@ def setup(args):
     num_classes = 5
 
     model = VisionTransformerINT8(config, args.img_size, zero_head=False, num_classes=num_classes)
+    # uncomment this and uncomment the above line when calibrating
+    # model = VisionTransformerINT8(config, args.img_size, zero_head=False)
     model.load_from(np.load(args.pretrained_dir))
     model.to(args.device)
     num_params = count_parameters(model)
