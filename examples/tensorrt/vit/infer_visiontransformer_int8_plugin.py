@@ -58,7 +58,7 @@ def setup_trt(args, config, model):
 def parse_option():
     parser = argparse.ArgumentParser('ViT evaluation script', add_help=False)
     parser.add_argument("--model_type", choices=["ViT-B_16", "ViT-B_32", "ViT-L_16",
-                                             "ViT-L_32", "ViT-H_14"],
+                                             "ViT-L_32", "ViT-H_14", "R50-ViT-B_16"],
                         default="ViT-B_16",
                         help="Which variant to use.")
     parser.add_argument("--img_size", default=384, type=int, 

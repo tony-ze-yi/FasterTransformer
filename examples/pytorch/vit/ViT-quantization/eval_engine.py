@@ -45,7 +45,7 @@ from vit_int8 import VisionTransformerINT8
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-CALIBRATION = True
+CALIBRATION = False
 
 class AverageMeter(object):
     """Computes and stores the average and current value"""
