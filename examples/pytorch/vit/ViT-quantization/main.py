@@ -164,7 +164,7 @@ def valid(args, config, model, test_loader):
                 f'Loss {eval_losses.val:.4f} ({eval_losses.avg:.4f})\t'
                 f'Acc@1 {acc1_meter.val:.3f} ({acc1_meter.avg:.3f})\t'
                 f'Acc@5 {acc5_meter.val:.3f} ({acc5_meter.avg:.3f})')
-            torch.cuda.memory_stats(args.device)
+            print(torch.cuda.memory_stats(args.device))
     logger.info(f' * Acc@1 {acc1_meter.avg:.3f} Acc@5 {acc5_meter.avg:.3f}')
     print(f"Validation time: {time.time() - start}")
 
