@@ -208,8 +208,7 @@ def validate_trt(args, config):
         num_classes = 5
     model_config = CONFIGS[args.model_type]
     model = VisionTransformerINT8(model_config, args.img_size, zero_head=False, num_classes=num_classes)
-    model_ckpt = torch.load(args.pretrained_dir, map_location="cpu")
-    model.load_state_dict(model_ckpt["model"] if "model" in model_ckpt else model_ckpt, strict=False)
+    model.load_state_dict(torch.load(args.pretrained_dir))
     model.cuda()
     model.eval()
     model.half()
