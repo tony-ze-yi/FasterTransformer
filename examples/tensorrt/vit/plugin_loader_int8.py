@@ -44,7 +44,7 @@ class ViTINT8PluginLoader:
 
     def load_model_config(self, config, args):
         print(config)
-        if config.patches.size:
+        if "size" in config.patches:
             self.patch_size_        = config.patches.size[0]
         else:
             self.patch_size_        = config.patches.grid[0]
