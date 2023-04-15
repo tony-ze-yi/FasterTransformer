@@ -213,6 +213,11 @@ def train(args, config):
     model_ckpt = torch.load(args.pretrained_dir, map_location="cpu")
     model.load_state_dict(model_ckpt["model"] if "model" in model_ckpt else model_ckpt, strict=False)
     model.cuda()
+    if args.validate:
+        model.eval()
+        quant_utils.configure_model(model, args, calib=False)
+        accuracy = valid(args, config, model, test_loader)
+        return
     model.train()
     
     teacher = None
@@ -358,6 +363,7 @@ def parse_option():
     parser.add_argument('--eval', action='store_true', help='Perform evaluation only')
     parser.add_argument('--calib', action='store_true', help='Perform calibration only')
     parser.add_argument('--train', action='store_true', help='Perform training only')
+    parser.add_argument('--validate', action='store_true', help='Perform validation only')
     parser.add_argument('--throughput', action='store_true', help='Test throughput only')
     parser.add_argument('--num-calib-batch', type=int, default=10, help='Number of batches for calibration. 0 will disable calibration.')
     parser.add_argument('--calib-batchsz', type=int, default=8, help='Batch size when doing calibration')
@@ -467,7 +473,7 @@ def main():
         calib(args, config, model)
     
     # Quantization-Aware Training
-    if args.train:
+    if args.train or args.validate:
         # args, model = setup(args)
         train(args, config)
 

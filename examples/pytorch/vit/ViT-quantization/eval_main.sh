@@ -1,0 +1,16 @@
+python -m torch.distributed.launch --nproc_per_node 1 \
+    --master_port 12345 main.py \
+    --name vit \
+    --pretrained_dir output/vit_checkpoint.bin \
+    --data-path $DATA_DIR \
+    --model_type R50-ViT-B_16 \
+    --quant-mode ft2 \
+    --img_size 384 \
+    --output qat_output \
+    --quant-mode ft2\
+    --train_batch_size 24\
+    --batch-size 24 \
+    --num-epochs 100 \
+    --qat-lr 1e-3\
+    --fp16 \
+    --validate
