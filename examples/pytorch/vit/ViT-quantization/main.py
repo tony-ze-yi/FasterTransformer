@@ -215,6 +215,7 @@ def train(args, config):
     model.cuda()
     if args.validate:
         model.eval()
+        dataset_train, dataset_val, train_loader, test_loader = build_loader(config, args)
         quant_utils.configure_model(model, args, calib=False)
         accuracy = valid(args, config, model, test_loader)
         return
