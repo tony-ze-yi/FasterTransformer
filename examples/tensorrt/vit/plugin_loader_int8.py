@@ -99,7 +99,8 @@ class ViTINT8PluginLoader:
         
         vit_weights = ViTINT8WeightLoader(self.layer_num_, self.img_size_, self.patch_size_, weights, 
             classifier='token' if self.with_class_token_ else '' )
-        vit_weights.to_int8(ths_path='../../../build/lib/libpyt_vit.so')
+        # vit_weights.to_int8(ths_path='../../../build/lib/libpyt_vit.so')
+        vit_weights.to_int8()
         vit_weights.to_cuda()
         weights = vit_weights.listed_weight_to_dict()
         
