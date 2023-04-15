@@ -143,6 +143,7 @@ def valid(args, config, model, test_loader):
     model.eval()
     all_preds, all_label = [], []
     loss_fct = torch.nn.CrossEntropyLoss()
+    torch.cuda.empty_cache()
     start = time.time()
     for step, batch in enumerate(test_loader):
         batch = tuple(t.to(args.device) for t in batch)
