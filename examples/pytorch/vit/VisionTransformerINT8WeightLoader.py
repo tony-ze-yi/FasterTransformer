@@ -146,7 +146,7 @@ class ViTINT8WeightLoader(object):
         
         return ret
 
-    def to_int8(self, ths_path='../../../lib/libth_transformer.so'):
+    def to_int8(self, ths_path='../../../build/lib/libth_transformer.so'):
         if 'transformer.encoder.layer.0.attn.query._input_quantizer._amax' not in self.weights:
             raise RuntimeError("There is no quantization node in the checkpoint, cannot be quantized to int8.")
         if self.int8:
