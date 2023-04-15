@@ -7,9 +7,10 @@ python -m torch.distributed.launch --nproc_per_node 1 \
     --quant-mode ft2 \
     --img_size 384 \
     --output qat_output \
-    --train_batch_size 64\
-    --batch-size 64 \
+    --train_batch_size 128\
+    --batch-size 128 \
     --num-epochs 100 \
     --qat-lr 1e-3\
     --fp16 \
-    --validate
+    --validate\
+    --eval_batch_size 128
