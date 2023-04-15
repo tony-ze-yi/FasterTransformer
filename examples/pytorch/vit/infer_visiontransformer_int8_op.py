@@ -25,6 +25,7 @@ from timm.utils import accuracy, AverageMeter
 from VisionTransformerINT8WeightLoader import ViTINT8WeightLoader
 
 import sys
+
 sys.path.insert(0, "./ViT-quantization/ViT-pytorch")
 
 
@@ -41,6 +42,7 @@ from data import build_val_loader
 test_time = 100
 warmup_time = 10
 
+
 def setup(args):
     # Prepare model
     config = CONFIGS[args.model_type]
@@ -49,7 +51,9 @@ def setup(args):
     num_classes = 1000 if args.dataset == "ImageNet" else 100
     # num_classes = 5
 
-    model = VisionTransformerINT8(config, args.img_size, zero_head=False, num_classes=num_classes)
+    model = VisionTransformerINT8(
+        config, args.img_size, zero_head=False, num_classes=num_classes
+    )
     model.load_state_dict(torch.load(args.calibrated_dir))
 
     quant_utils.configure_model(model, args, calib=False)
@@ -57,36 +61,77 @@ def setup(args):
 
     return config, model
 
-def parse_option():
-    parser = argparse.ArgumentParser('ViT evaluation script', add_help=False)
 
-    parser.add_argument("--model_type", choices=["ViT-B_16", "ViT-B_32", "ViT-L_16",
-                                             "ViT-L_32", "ViT-H_14"],
-                        default="ViT-B_16",
-                        help="Which variant to use.")
-    parser.add_argument("--img_size", default=384, type=int, 
-                        help="Resolution size")
-    parser.add_argument("--dataset", choices=["ImageNet"], default="ImageNet",
-                        help="Which downstream task.")
-    parser.add_argument("--pretrained_dir", type=str, default="checkpoint/ViT-B_16.npz",
-                        help="Where to search for pretrained ViT models.")
-    parser.add_argument("--calibrated_dir", type=str, default="checkpoint/ViT-B_16_calib.pth",
-                        help="Where to search for calibrated ViT models.")
-    parser.add_argument("--data-path", type=str, default="/workspace/imagenet",
-                        help="Root directory for datasets.")
+def parse_option():
+    parser = argparse.ArgumentParser("ViT evaluation script", add_help=False)
+
+    parser.add_argument(
+        "--model_type",
+        choices=["ViT-B_16", "ViT-B_32", "ViT-L_16", "ViT-L_32", "ViT-H_14"],
+        default="ViT-B_16",
+        help="Which variant to use.",
+    )
+    parser.add_argument("--img_size", default=384, type=int, help="Resolution size")
+    parser.add_argument(
+        "--dataset",
+        choices=["ImageNet"],
+        default="ImageNet",
+        help="Which downstream task.",
+    )
+    parser.add_argument(
+        "--pretrained_dir",
+        type=str,
+        default="checkpoint/ViT-B_16.npz",
+        help="Where to search for pretrained ViT models.",
+    )
+    parser.add_argument(
+        "--calibrated_dir",
+        type=str,
+        default="checkpoint/ViT-B_16_calib.pth",
+        help="Where to search for calibrated ViT models.",
+    )
+    parser.add_argument(
+        "--data-path",
+        type=str,
+        default="/workspace/imagenet",
+        help="Root directory for datasets.",
+    )
 
     # easy config modification
-    parser.add_argument('--th-path', type=str, help='path to pytorch library', required=True)
-    parser.add_argument('--batch-size', type=int, default=32, help="batch size for single GPU")
-    parser.add_argument('--int8-mode', type=int, choices=[1,2,3], default=2,
-                        help="Which int8 mode to use, choices=[1,2,3], default=2")
-    parser.add_argument('--fp16_opt_level', type=str, default='O2',
-                        help="For fp16: Apex AMP optimization level selected in ['O0', 'O1', 'O2', and 'O3']."
-                             "See details at https://nvidia.github.io/apex/amp.html")
-    parser.add_argument('--seed', type=int, default=42,
-                        help="random seed for initialization")
-    parser.add_argument("--local_rank", type=int, default=-1, help='local rank for DistributedDataParallel')
-    parser.add_argument("--validate", action="store_true", help='If true, validate on ImageNet, else just profile')
+    parser.add_argument(
+        "--th-path", type=str, help="path to pytorch library", required=True
+    )
+    parser.add_argument(
+        "--batch-size", type=int, default=32, help="batch size for single GPU"
+    )
+    parser.add_argument(
+        "--int8-mode",
+        type=int,
+        choices=[1, 2, 3],
+        default=2,
+        help="Which int8 mode to use, choices=[1,2,3], default=2",
+    )
+    parser.add_argument(
+        "--fp16_opt_level",
+        type=str,
+        default="O2",
+        help="For fp16: Apex AMP optimization level selected in ['O0', 'O1', 'O2', and 'O3']."
+        "See details at https://nvidia.github.io/apex/amp.html",
+    )
+    parser.add_argument(
+        "--seed", type=int, default=42, help="random seed for initialization"
+    )
+    parser.add_argument(
+        "--local_rank",
+        type=int,
+        default=-1,
+        help="local rank for DistributedDataParallel",
+    )
+    parser.add_argument(
+        "--validate",
+        action="store_true",
+        help="If true, validate on ImageNet, else just profile",
+    )
 
     quant_utils.add_arguments(parser)
     args, unparsed = parser.parse_known_args()
@@ -96,9 +141,9 @@ def parse_option():
 
     config = get_config(args)
 
-    if args.quant_mode == 'ft1':
+    if args.quant_mode == "ft1":
         args.int8_mode = 1
-    elif args.quant_mode == 'ft2':
+    elif args.quant_mode == "ft2":
         args.int8_mode = 2
     else:
         raise NotImplementedError("For ViT-INT8, we only support ft1/ft2 as quant_mode")
@@ -107,7 +152,6 @@ def parse_option():
 
 
 def main(args, data_config):
-
     model_cfg, model = setup(args)
 
     if args.validate:
@@ -136,11 +180,13 @@ def validate(args, data_config, config, model):
     max_batch = args.batch_size
     img_size = args.img_size
     int8_mode = args.int8_mode
-    with_cls_token = config.classifier == 'token'
+    with_cls_token = config.classifier == "token"
     in_chans = 3
     model.half()
-    
-    vit_weights = ViTINT8WeightLoader(layer_num, args.img_size, patch_size, model.state_dict())
+
+    vit_weights = ViTINT8WeightLoader(
+        layer_num, args.img_size, patch_size, model.state_dict()
+    )
     vit_weights.to_int8(args.th_path)
     vit_weights.to_cuda()
 
@@ -148,32 +194,34 @@ def validate(args, data_config, config, model):
 
     torch.classes.load_library(th_path)
     try:
-        vit = torch.classes.VisionTransformerINT8.Class(weights, 
-                                                        max_batch, 
-                                                        img_size, 
-                                                        patch_size, 
-                                                        in_chans,
-                                                        embed_dim, 
-                                                        num_heads,
-                                                        inter_size,
-                                                        layer_num,
-                                                        int8_mode,
-                                                        with_cls_token
-                                                        )
+        vit = torch.classes.VisionTransformerINT8.Class(
+            weights,
+            max_batch,
+            img_size,
+            patch_size,
+            in_chans,
+            embed_dim,
+            num_heads,
+            inter_size,
+            layer_num,
+            int8_mode,
+            with_cls_token,
+        )
     except:
         # legacy ths for 20.03 image
-        vit = torch.classes.VisionTransformerINT8Class(weights,
-                                                        max_batch, 
-                                                        img_size, 
-                                                        patch_size, 
-                                                        in_chans,
-                                                        embed_dim, 
-                                                        num_heads,
-                                                        inter_size,
-                                                        layer_num,
-                                                        int8_mode,
-                                                        with_cls_token
-                                                        )
+        vit = torch.classes.VisionTransformerINT8Class(
+            weights,
+            max_batch,
+            img_size,
+            patch_size,
+            in_chans,
+            embed_dim,
+            num_heads,
+            inter_size,
+            layer_num,
+            int8_mode,
+            with_cls_token,
+        )
 
     end = time.time()
     for idx, (images, target) in enumerate(data_loader):
@@ -206,14 +254,16 @@ def validate(args, data_config, config, model):
         if idx % data_config.PRINT_FREQ == 0:
             memory_used = torch.cuda.max_memory_allocated() / (1024.0 * 1024.0)
             print(
-                f'Test: [{idx:4}/{len(data_loader)}]\t'
-                f'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                f'Loss {loss_meter.val:.4f} ({loss_meter.avg:.4f})\t'
-                f'Acc@1 {acc1_meter.val:.3f} ({acc1_meter.avg:.3f})\t'
-                f'Acc@5 {acc5_meter.val:.3f} ({acc5_meter.avg:.3f})\t'
-                f'Mem {memory_used:.0f}MB')
-    print(f' * Acc@1 {acc1_meter.avg:.3f} Acc@5 {acc5_meter.avg:.3f}')
+                f"Test: [{idx:4}/{len(data_loader)}]\t"
+                f"Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t"
+                f"Loss {loss_meter.val:.4f} ({loss_meter.avg:.4f})\t"
+                f"Acc@1 {acc1_meter.val:.3f} ({acc1_meter.avg:.3f})\t"
+                f"Acc@5 {acc5_meter.val:.3f} ({acc5_meter.avg:.3f})\t"
+                f"Mem {memory_used:.0f}MB"
+            )
+    print(f" * Acc@1 {acc1_meter.avg:.3f} Acc@5 {acc5_meter.avg:.3f}")
     return acc1_meter.avg, acc5_meter.avg, loss_meter.avg
+
 
 @torch.no_grad()
 def run_vitnv_op(args, config, model, images):
@@ -226,44 +276,48 @@ def run_vitnv_op(args, config, model, images):
     max_batch = args.batch_size
     img_size = args.img_size
     int8_mode = args.int8_mode
-    with_cls_token = config.classifier == 'token'
+    with_cls_token = config.classifier == "token"
     in_chans = 3
     model.half()
     torch.classes.load_library(th_path)
-    vit_weights = ViTINT8WeightLoader(layer_num, args.img_size, patch_size, model.state_dict(), config.classifier)
+    vit_weights = ViTINT8WeightLoader(
+        layer_num, args.img_size, patch_size, model.state_dict(), config.classifier
+    )
     vit_weights.to_int8(args.th_path)
     vit_weights.to_cuda()
 
     weights = vit_weights.listed_weights()
 
-    ##run pytorch op 
+    ##run pytorch op
     try:
-        vit = torch.classes.VisionTransformerINT8.Class(weights, 
-                                                        max_batch, 
-                                                        img_size, 
-                                                        patch_size, 
-                                                        in_chans,
-                                                        embed_dim, 
-                                                        num_heads,
-                                                        inter_size,
-                                                        layer_num,
-                                                        int8_mode,
-                                                        with_cls_token
-                                                        )
+        vit = torch.classes.VisionTransformerINT8.Class(
+            weights,
+            max_batch,
+            img_size,
+            patch_size,
+            in_chans,
+            embed_dim,
+            num_heads,
+            inter_size,
+            layer_num,
+            int8_mode,
+            with_cls_token,
+        )
     except:
         # legacy ths for 20.03 image
-        vit = torch.classes.VisionTransformerINT8Class(weights,
-                                                        max_batch, 
-                                                        img_size, 
-                                                        patch_size, 
-                                                        in_chans,
-                                                        embed_dim, 
-                                                        num_heads,
-                                                        inter_size,
-                                                        layer_num,
-                                                        int8_mode,
-                                                        with_cls_token
-                                                        )
+        vit = torch.classes.VisionTransformerINT8Class(
+            weights,
+            max_batch,
+            img_size,
+            patch_size,
+            in_chans,
+            embed_dim,
+            num_heads,
+            inter_size,
+            layer_num,
+            int8_mode,
+            with_cls_token,
+        )
     # warm up
     for i in range(warmup_time):
         op_tmp = vit.forward(images)
@@ -271,15 +325,15 @@ def run_vitnv_op(args, config, model, images):
 
     torch.cuda.synchronize()
     op_begin = time.time()
-    #_nvtx.rangePushA("op")
+    # _nvtx.rangePushA("op")
     for i in range(test_time):
         op_tmp = vit.forward(images)
-        op_output = model.head(op_tmp[:,0])
-    #_nvtx.rangePop()
+        op_output = model.head(op_tmp[:, 0])
+    # _nvtx.rangePop()
     torch.cuda.synchronize()
     op_end = time.time()
-    op_output = op_output.cpu().numpy() 
-    print("INT8 op time : ", (op_end - op_begin)/test_time*1000.0, "ms")
+    op_output = op_output.cpu().numpy()
+    print("INT8 op time : ", (op_end - op_begin) / test_time * 1000.0, "ms")
 
     return op_output
 
@@ -292,10 +346,10 @@ def run_torch(model, images, mark):
 
     # torch.cuda.synchronize()
     # torch_start = time.time()
-    #_nvtx.rangePushA("torch")
+    # _nvtx.rangePushA("torch")
     # for i in range(test_time):
     torch_output = model(images)
-    #_nvtx.rangePop()
+    # _nvtx.rangePop()
     # torch.cuda.synchronize()
     # torch_end = time.time()
     torch_output = torch_output[0].cpu().numpy()
@@ -303,10 +357,11 @@ def run_torch(model, images, mark):
 
     return torch_output
 
+
 @torch.no_grad()
 def validate_with_random_data(args, model_cfg, model):
     model.eval()
-    
+
     max_batch = args.batch_size
     img_size = args.img_size
     in_chans = 3
@@ -327,12 +382,18 @@ def validate_with_random_data(args, model_cfg, model):
 
     # diff = abs(FP16_torch_traced_output - FP16_op_output)
     diff = abs(INT8_torch_output - INT8_op_output)
-    print("INT8_torch_output vs INT8_op_output , avg diff : ", diff.mean((1)), "max diff : ", diff.max((1)))
+    print(
+        "INT8_torch_output vs INT8_op_output , avg diff : ",
+        diff.mean((1)),
+        "max diff : ",
+        diff.max((1)),
+    )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     args, data_config = parse_option()
 
-    seed = args.seed #+ int(time.time())
+    seed = args.seed  # + int(time.time())
     torch.manual_seed(seed)
     np.random.seed(seed)
     cudnn.benchmark = True
@@ -344,8 +405,9 @@ if __name__ == '__main__':
     else:  # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
         torch.cuda.set_device(args.local_rank)
         device = torch.device("cuda", args.local_rank)
-        torch.distributed.init_process_group(backend='nccl',
-                                             timeout=datetime.timedelta(minutes=60))
+        torch.distributed.init_process_group(
+            backend="nccl", timeout=datetime.timedelta(minutes=60)
+        )
         args.n_gpu = 1
     args.device = device
 
