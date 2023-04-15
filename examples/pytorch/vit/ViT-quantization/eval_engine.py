@@ -202,10 +202,7 @@ def calib(args, config, model):
     logger.info(f'Model is saved to {output_model_path}')
 
 def validate_trt(args, config):
-    if CALIBRATION:
-        num_classes = 1000
-    else:
-        num_classes = 5
+    num_classes = 5
     model_config = CONFIGS[args.model_type]
     model = VisionTransformerINT8(model_config, args.img_size, zero_head=False, num_classes=num_classes)
     model.load_state_dict(torch.load(args.pretrained_dir))
