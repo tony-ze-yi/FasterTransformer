@@ -39,6 +39,7 @@ from data import build_loader
 from config import get_config
 import quant_utils
 from vit_int8 import VisionTransformerINT8
+import time
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -145,6 +146,7 @@ def valid(args, config, model, test_loader):
     model.eval()
     all_preds, all_label = [], []
     loss_fct = torch.nn.CrossEntropyLoss()
+    start = time.time()
     for step, batch in enumerate(test_loader):
         batch = tuple(t.to(args.device) for t in batch)
         x, y = batch
@@ -166,6 +168,7 @@ def valid(args, config, model, test_loader):
                 f'Acc@1 {acc1_meter.val:.3f} ({acc1_meter.avg:.3f})\t'
                 f'Acc@5 {acc5_meter.val:.3f} ({acc5_meter.avg:.3f})')
     logger.info(f' * Acc@1 {acc1_meter.avg:.3f} Acc@5 {acc5_meter.avg:.3f}')
+    print(f"Validation time: {time.time() - start}")
 
     return acc1_meter.avg
 
