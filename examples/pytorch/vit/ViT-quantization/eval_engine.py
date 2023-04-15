@@ -41,6 +41,7 @@ from data import build_loader
 from config import get_config
 import quant_utils
 from vit_int8 import VisionTransformerINT8
+from infer_visiontransformer_int8_plugin import setup_trt
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -211,6 +212,8 @@ def validate_trt(args, config):
     model.load_state_dict(model_ckpt["model"] if "model" in model_ckpt else model_ckpt, strict=False)
     model.cuda()
     model.eval()
+    model.half()
+    engine, p_loader = setup_trt(args, config, model)
     quant_utils.configure_model(model, args, calib=False)
 
     dataset_train, dataset_val, train_loader, test_loader = build_loader(config, args)
@@ -242,10 +245,7 @@ def validate_trt(args, config):
     ctypes.cdll.LoadLibrary(plugin_path)
     # if not handle:
     #     raise RuntimeError("Fail to load plugin library: %s" % plugin_path)
-    with open(args.engine, 'rb') as f, trt.Runtime(trt.Logger(trt.Logger.INFO)) as runtime,\
-        runtime.deserialize_cuda_engine(f.read()) as engine, engine.create_execution_context() as context:
-        if engine == None:
-            print('engine is None')
+    with engine.create_execution_context() as context:
 
         context.active_optimization_profile = 0
         stream = 0 #torch.cuda.Stream()
@@ -527,6 +527,7 @@ def parse_option():
                         help="Loss scaling to improve fp16 numeric stability. Only used when fp16 set to True.\n"
                              "0 (default value): dynamic loss scaling.\n"
                              "Positive power of 2: static loss scaling value.\n")
+    parser.add_argument('--plugin_path', type=str, default="../../../../build/lib/libvit_plugin.so", help='path to plugin lib')
     quant_utils.add_arguments(parser)
     args, unparsed = parser.parse_known_args()
     if args.quant_mode is not None:
