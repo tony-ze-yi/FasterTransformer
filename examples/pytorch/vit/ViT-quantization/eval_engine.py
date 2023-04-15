@@ -251,7 +251,7 @@ def validate_trt(args, config):
         output_shape = tuple(context.get_binding_shape(1))
         print(output_shape)
 
-        d_output = torch.empty(output_shape, dtype=torch.float32).cuda()
+        d_output = torch.empty(output_shape, dtype=torch.half).cuda()
         for idx, (images, target) in enumerate(epoch_iterator):
             images_half = torch.tensor(images, dtype=torch.half)
             images_half = images_half.cuda(non_blocking=True)
@@ -268,7 +268,7 @@ def validate_trt(args, config):
             # torch.save(torch_embed, 'torch_embed.pt')
             # exit(0)
             with torch.no_grad():
-                logits = model.head(d_output.float()[:, 0])
+                logits = model.head(d_output.half()[:, 0])
 
                 # torch_pred, _ = model(images)
                 # if step % 10 == 0:
