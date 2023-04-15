@@ -99,16 +99,13 @@ def save_model(args, model):
 def setup(args):
     # Prepare model
     config = CONFIGS[args.model_type]
-    if CALIBRATION:
-        num_classes = 10 if args.dataset == "cifar10" else 1000
-        model = VisionTransformerINT8(config, args.img_size, zero_head=False, num_classes=num_classes)
+    if args.posttrain:
+        model = VisionTransformerINT8(config, args.img_size, zero_head=False, num_classes=5)
+        model_ckpt = torch.load(args.pretrained_dir, map_location="cpu")
+        model.load_state_dict(model_ckpt["model"] if "model" in model_ckpt else model_ckpt, strict=False)
     else:
-        num_classes = 5
-        # zero_head is set to true here as we are shaping the head to be custom classes (not 1000)
-        model = VisionTransformerINT8(config, args.img_size, zero_head=True, num_classes=num_classes)
-    
-    # uncomment this and uncomment the above line when calibrating
-    model.load_from(np.load(args.pretrained_dir))
+        model = VisionTransformerINT8(config, args.img_size, zero_head=True, num_classes=5)
+        model.load_from(torch.load(args.pretrained_dir))
     model.to(args.device)
     num_params = count_parameters(model)
 
@@ -369,6 +366,7 @@ def parse_option():
     parser.add_argument('--train', action='store_true', help='Perform training only')
     parser.add_argument('--validate', action='store_true', help='Perform validation only')
     parser.add_argument('--throughput', action='store_true', help='Test throughput only')
+    parser.add_argument('--posttrain', action='store_true', help='Calibrate post-train .bin')
     parser.add_argument('--num-calib-batch', type=int, default=10, help='Number of batches for calibration. 0 will disable calibration.')
     parser.add_argument('--calib-batchsz', type=int, default=8, help='Batch size when doing calibration')
     parser.add_argument('--calib-output-path', type=str, default='calib-checkpoint', help='Output directory to save calibrated model')

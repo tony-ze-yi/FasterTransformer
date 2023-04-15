@@ -11,4 +11,5 @@ python -m torch.distributed.launch --nproc_per_node 1 \
     --quant-mode ft2 \
     --calibrator percentile \
     --percentile 99.99 \
-    --calib-output-path calib-posttrain
+    --calib-output-path calib-posttrain\
+    --posttrain
