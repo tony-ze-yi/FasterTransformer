@@ -209,6 +209,7 @@ def validate_trt(args, config):
     model_config = CONFIGS[args.model_type]
     model = VisionTransformerINT8(model_config, args.img_size, zero_head=False, num_classes=num_classes)
     model.load_state_dict(torch.load(args.pretrained_dir))
+    quant_utils.configure_model(model, args, calib=False)
     model.cuda()
     model.eval()
     model.half()
