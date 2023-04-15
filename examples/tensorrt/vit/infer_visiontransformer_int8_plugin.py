@@ -41,7 +41,7 @@ def setup_torch(args):
     config = CONFIGS[args.model_type]
     print(config)
 
-    model = VisionTransformerINT8(config, args.img_size, zero_head=False, num_classes=1000)
+    model = VisionTransformerINT8(config, args.img_size, zero_head=False, num_classes=5)
     model.load_state_dict(torch.load(args.pretrained_dir))
 
     quant_utils.configure_model(model, args, calib=False)
