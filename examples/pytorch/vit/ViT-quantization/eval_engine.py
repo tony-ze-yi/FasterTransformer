@@ -524,6 +524,8 @@ def parse_option():
                              "0 (default value): dynamic loss scaling.\n"
                              "Positive power of 2: static loss scaling value.\n")
     parser.add_argument('--plugin_path', type=str, default="../../../../build/lib/libvit_plugin.so", help='path to plugin lib')
+    parser.add_argument('--int8-mode', type=int, default=2, choices=[1, 2],
+                        help="Which int8 mode to use, choose from [1, 2]")
     quant_utils.add_arguments(parser)
     args, unparsed = parser.parse_known_args()
     if args.quant_mode is not None:
