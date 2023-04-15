@@ -47,7 +47,7 @@ class ViTINT8PluginLoader:
         if "size" in config.patches:
             self.patch_size_        = config.patches.size[0]
         else:
-            self.patch_size_        = config.patches.grid[0]
+            self.patch_size_        = 16 # hardcoded resnet50
         self.num_heads_         = config.transformer.num_heads
         self.layer_num_         = config.transformer.num_layers
         self.inter_size_        = config.transformer.mlp_dim
