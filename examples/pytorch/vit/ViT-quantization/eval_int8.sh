@@ -7,5 +7,5 @@ python -m torch.distributed.launch --nproc_per_node 1 \
     --pretrained_dir output/vit_checkpoint.bin \
     --plugin_path=../../../../build/lib/libvit_plugin.so \
     --data-path $DATA_DIR \
-    --batch-size 32 \
-    --eval_batch_size 32\
+    --batch-size 64 \
+    --eval_batch_size 64\
