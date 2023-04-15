@@ -4,9 +4,9 @@ python -m torch.distributed.launch --nproc_per_node 1 \
     --model_type=R50-ViT-B_16 \
     --img_size=384 \
     --engine ../../../tensorrt/vit/ViTINT8Engine_16_12_12_3072_768_32_384_577_2 \
-    --pretrained_dir output/vit_checkpoint.bin \
+    --pretrained_dir calib-posttrain/R50-ViT-B_16_calib.pth \
     --plugin_path=../../../../build/lib/libvit_plugin.so \
     --data-path $DATA_DIR \
     --batch-size 64 \
     --eval_batch_size 64\
-    --int8-mode 1
+    --int8-mode 2
