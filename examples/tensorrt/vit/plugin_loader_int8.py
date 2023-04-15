@@ -43,6 +43,7 @@ class ViTINT8PluginLoader:
         self.plg_creator = plg_registry.get_plugin_creator("CustomVisionTransformerINT8Plugin", "1", "")
 
     def load_model_config(self, config, args):
+        print(config)
         self.patch_size_        = config.patches.size[0]
         self.num_heads_         = config.transformer.num_heads
         self.layer_num_         = config.transformer.num_layers

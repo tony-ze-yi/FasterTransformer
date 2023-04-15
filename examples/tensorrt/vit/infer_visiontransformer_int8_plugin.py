@@ -38,6 +38,7 @@ warmup_time = 10
 
 def setup_torch(args):
     # Prepare model
+    print("model", args.model_type)
     config = CONFIGS[args.model_type]
     print(config)
 
