@@ -1,0 +1,541 @@
+classifier: token
+hidden_size: 768
+patches:
+  grid: !!python/tuple
+  - 14
+  - 14
+representation_size: null
+resnet:
+  num_layers: !!python/tuple
+  - 3
+  - 4
+  - 9
+  width_factor: 1
+transformer:
+  attention_dropout_rate: 0.0
+  dropout_rate: 0.1
+  mlp_dim: 3072
+  num_heads: 12
+  num_layers: 12
+
+[04/15/2023-03:51:01] [TRT] [I] [MemUsageChange] Init CUDA: CPU +2, GPU +0, now: CPU 109, GPU 1595 (MiB)
+[04/15/2023-03:51:04] [TRT] [I] [MemUsageChange] Init builder kernel library: CPU +419, GPU +116, now: CPU 580, GPU 1711 (MiB)
+Generate plugin field collection...
+Quantizing checkpoint ...
+Quantizing checkpoint done.
+name=max_batch, value=64
+name=img_size, value=384
+name=patch_size, value=16
+name=in_chans, value=3
+name=embed_dim, value=768
+name=num_heads, value=12
+name=inter_size, value=3072
+name=layer_num, value=12
+name=int8_mode, value=2
+name=with_cls_token, value=1
+[WARNING] igemm.config is not found; using default GEMM algo
+[WARNING] igemm.config is not found; using default GEMM algo
+Building TRT engine....
+[WARNING] igemm.config is not found; using default GEMM algo
+[04/15/2023-03:51:06] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +8, now: CPU 781, GPU 2639 (MiB)
+[04/15/2023-03:51:06] [TRT] [I] [MemUsageChange] Init cuDNN: CPU +0, GPU +10, now: CPU 781, GPU 2649 (MiB)
+[04/15/2023-03:51:06] [TRT] [I] Local timing cache in use. Profiling results in this builder pass will not be stored.
+[WARNING] igemm.config is not found; using default GEMM algo
+[04/15/2023-03:51:06] [TRT] [I] Detected 1 inputs and 1 output network tensors.
+[WARNING] igemm.config is not found; using default GEMM algo
+[04/15/2023-03:51:06] [TRT] [I] Total Host Persistent Memory: 112
+[04/15/2023-03:51:06] [TRT] [I] Total Device Persistent Memory: 0
+[04/15/2023-03:51:06] [TRT] [I] Total Scratch Memory: 0
+[04/15/2023-03:51:06] [TRT] [I] [MemUsageStats] Peak memory usage of TRT CPU/GPU memory allocators: CPU 0 MiB, GPU 256 MiB
+[04/15/2023-03:51:06] [TRT] [I] [BlockAssignment] Algorithm ShiftNTopDown took 0.003544ms to assign 1 blocks to 1 nodes requiring 56721408 bytes.
+[04/15/2023-03:51:06] [TRT] [I] Total Activation Memory: 56721408
+[04/15/2023-03:51:07] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +8, now: CPU 786, GPU 2919 (MiB)
+[04/15/2023-03:51:07] [TRT] [I] [MemUsageChange] Init cuDNN: CPU +0, GPU +8, now: CPU 786, GPU 2927 (MiB)
+[04/15/2023-03:51:07] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in building engine: CPU +0, GPU +0, now: CPU 0, GPU 0 (MiB)
+[FT][INFO] start serialize vit...
+[FT][INFO] start serialize vit...
+[04/15/2023-03:51:07] [TRT] [I] Saving Engine to ./ViTINT8Engine_16_12_12_3072_768_64_384_577_2
+[04/15/2023-03:51:07] [TRT] [I] Done.
+INFO: Configuring Model for Quantization
+INFO: using quantization package /opt/conda/lib/python3.8/site-packages/pytorch_quantization/__init__.py
+INFO: Warning: changing transformer.encoder.layer.0.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.0.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.0.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.0.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.0.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.0.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.1.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.1.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.1.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.1.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.1.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.1.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.2.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.2.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.2.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.2.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.2.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.2.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.3.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.3.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.3.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.3.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.3.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.3.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.4.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.4.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.4.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.4.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.4.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.4.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.5.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.5.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.5.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.5.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.5.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.5.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.6.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.6.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.6.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.6.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.6.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.6.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.7.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.7.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.7.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.7.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.7.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.7.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.8.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.8.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.8.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.8.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.8.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.8.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.9.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.9.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.9.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.9.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.9.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.9.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.10.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.10.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.10.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.10.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.10.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.10.add2_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.11.layernorm_input1_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.11.add1_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.11.add1_residual_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.11.layernorm_input2_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.11.add2_local_input_quantizer _disabled=True
+INFO: Warning: changing transformer.encoder.layer.11.add2_residual_input_quantizer _disabled=True
+INFO: FUSE_QKV: transformer.encoder.layer.0.attn                  
+INFO:           q= 4.6758 k= 4.6758 v= 4.6758 ->  4.6758
+INFO:           q= 0.3530 k= 0.3530 v= 0.3530 ->  0.3530
+INFO:           q= 4.6016 k= 4.6016 v= 4.6016 ->  4.6016
+INFO: FUSE_QKV: transformer.encoder.layer.1.attn                  
+INFO:           q= 4.0234 k= 4.0234 v= 4.0234 ->  4.0234
+INFO:           q= 0.3779 k= 0.3779 v= 0.3779 ->  0.3779
+INFO:           q= 3.9648 k= 3.9648 v= 3.9648 ->  3.9648
+INFO: FUSE_QKV: transformer.encoder.layer.2.attn                  
+INFO:           q= 3.6328 k= 3.6328 v= 3.6328 ->  3.6328
+INFO:           q= 0.3115 k= 0.3115 v= 0.3115 ->  0.3115
+INFO:           q= 3.5762 k= 3.5762 v= 3.5762 ->  3.5762
+INFO: FUSE_QKV: transformer.encoder.layer.3.attn                  
+INFO:           q= 3.3457 k= 3.3457 v= 3.3457 ->  3.3457
+INFO:           q= 0.3596 k= 0.3596 v= 0.3596 ->  0.3596
+INFO:           q= 3.2988 k= 3.2988 v= 3.2988 ->  3.2988
+INFO: FUSE_QKV: transformer.encoder.layer.4.attn                  
+INFO:           q= 3.2832 k= 3.2832 v= 3.2832 ->  3.2832
+INFO:           q= 0.3701 k= 0.3701 v= 0.3701 ->  0.3701
+INFO:           q= 3.2891 k= 3.2891 v= 3.2891 ->  3.2891
+INFO: FUSE_QKV: transformer.encoder.layer.5.attn                  
+INFO:           q= 3.3574 k= 3.3574 v= 3.3574 ->  3.3574
+INFO:           q= 0.3071 k= 0.3071 v= 0.3071 ->  0.3071
+INFO:           q= 3.3535 k= 3.3535 v= 3.3535 ->  3.3535
+INFO: FUSE_QKV: transformer.encoder.layer.6.attn                  
+INFO:           q= 3.8027 k= 3.8027 v= 3.8027 ->  3.8027
+INFO:           q= 0.3149 k= 0.3149 v= 0.3149 ->  0.3149
+INFO:           q= 3.7988 k= 3.7988 v= 3.7988 ->  3.7988
+INFO: FUSE_QKV: transformer.encoder.layer.7.attn                  
+INFO:           q= 4.3320 k= 4.3320 v= 4.3320 ->  4.3320
+INFO:           q= 0.3098 k= 0.3098 v= 0.3098 ->  0.3098
+INFO:           q= 4.3203 k= 4.3203 v= 4.3203 ->  4.3203
+INFO: FUSE_QKV: transformer.encoder.layer.8.attn                  
+INFO:           q= 4.7812 k= 4.7812 v= 4.7812 ->  4.7812
+INFO:           q= 0.3306 k= 0.3306 v= 0.3306 ->  0.3306
+INFO:           q= 4.7695 k= 4.7695 v= 4.7695 ->  4.7695
+INFO: FUSE_QKV: transformer.encoder.layer.9.attn                  
+INFO:           q= 4.8398 k= 4.8398 v= 4.8398 ->  4.8398
+INFO:           q= 0.3450 k= 0.3450 v= 0.3450 ->  0.3450
+INFO:           q= 4.8164 k= 4.8164 v= 4.8164 ->  4.8164
+INFO: FUSE_QKV: transformer.encoder.layer.10.attn                 
+INFO:           q= 4.8320 k= 4.8320 v= 4.8320 ->  4.8320
+INFO:           q= 0.2988 k= 0.2988 v= 0.2988 ->  0.2988
+INFO:           q= 4.8281 k= 4.8281 v= 4.8281 ->  4.8281
+INFO: FUSE_QKV: transformer.encoder.layer.11.attn                 
+INFO:           q= 4.6211 k= 4.6211 v= 4.6211 ->  4.6211
+INFO:           q= 0.3125 k= 0.3125 v= 0.3125 ->  0.3125
+INFO:           q= 4.6250 k= 4.6250 v= 4.6250 ->  4.6250
+transformer.encoder.layer.0.ffn.fc1._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=3.6992 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.ffn.fc1._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.3303 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.ffn.fc1._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=4.7734 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.ffn.fc2._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=1.7480 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.ffn.fc2._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.5498 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.ffn.fc2._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=1.7637 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.query._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=1.7871 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.query._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3530 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.query._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=4.6016 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.key._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=1.7871 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.key._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.3530 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.key._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.6016 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.value._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=1.7871 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.value._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3530 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.value._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=4.6016 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.out._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=1.0840 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.out._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.2358 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.out._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.5723 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.matmul_q_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.6758 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.matmul_k_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.6758 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.matmul_v_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.6758 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.matmul_a_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.5781 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.attn.softmax_input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=88.5625 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.0.layernorm_input1_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.0.add1_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.0.add1_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.0.layernorm_input2_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.0.add2_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.0.add2_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.1.ffn.fc1._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=5.4375 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.ffn.fc1._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.3552 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.ffn.fc1._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=4.6445 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.ffn.fc2._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=2.1523 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.ffn.fc2._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.2878 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.ffn.fc2._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=1.0186 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.query._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=1.9199 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.query._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3779 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.query._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.9648 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.key._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=1.9199 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.key._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.3779 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.key._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.9648 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.value._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=1.9199 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.value._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3779 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.value._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.9648 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.out._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.9595 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.out._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.1979 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.out._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.5918 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.matmul_q_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.0234 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.matmul_k_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.0234 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.matmul_v_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.0234 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.matmul_a_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.1895 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.attn.softmax_input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=76.7500 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.1.layernorm_input1_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.1.add1_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.1.add1_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.1.layernorm_input2_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.1.add2_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.1.add2_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.2.ffn.fc1._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=4.0859 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.ffn.fc1._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.4753 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.ffn.fc1._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=4.6602 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.ffn.fc2._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=1.9746 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.ffn.fc2._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.3857 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.ffn.fc2._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.8560 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.query._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=2.7188 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.query._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3115 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.query._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.5762 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.key._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=2.7188 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.key._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.3115 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.key._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.5762 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.value._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=2.7188 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.value._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3115 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.value._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.5762 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.out._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.9653 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.out._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.2128 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.out._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.6284 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.matmul_q_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.6328 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.matmul_k_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.6328 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.matmul_v_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.6328 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.matmul_a_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.1339 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.attn.softmax_input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=59.5625 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.2.layernorm_input1_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.2.add1_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.2.add1_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.2.layernorm_input2_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.2.add2_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.2.add2_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.3.ffn.fc1._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=4.2578 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.ffn.fc1._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.2507 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.ffn.fc1._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=4.7617 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.ffn.fc2._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=2.1855 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.ffn.fc2._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.4033 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.ffn.fc2._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=1.0225 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.query._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=3.4219 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.query._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3596 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.query._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.2988 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.key._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=3.4219 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.key._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.3596 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.key._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.2988 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.value._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=3.4219 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.value._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3596 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.value._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.2988 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.out._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.8301 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.out._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.1760 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.out._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.5635 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.matmul_q_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.3457 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.matmul_k_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.3457 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.matmul_v_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.3457 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.matmul_a_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.0971 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.attn.softmax_input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=52.6562 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.3.layernorm_input1_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.3.add1_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.3.add1_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.3.layernorm_input2_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.3.add2_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.3.add2_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.4.ffn.fc1._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=4.1836 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.ffn.fc1._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.3787 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.ffn.fc1._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=4.7500 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.ffn.fc2._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=2.0508 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.ffn.fc2._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.3630 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.ffn.fc2._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.8877 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.query._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=5.0977 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.query._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3701 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.query._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.2891 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.key._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=5.0977 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.key._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.3701 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.key._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.2891 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.value._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=5.0977 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.value._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3701 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.value._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.2891 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.out._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.8081 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.out._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.1677 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.out._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.5049 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.matmul_q_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.2832 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.matmul_k_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.2832 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.matmul_v_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.2832 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.matmul_a_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.0722 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.attn.softmax_input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=54.2500 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.4.layernorm_input1_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.4.add1_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.4.add1_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.4.layernorm_input2_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.4.add2_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.4.add2_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.5.ffn.fc1._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=4.2891 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.ffn.fc1._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.2686 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.ffn.fc1._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=4.4219 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.ffn.fc2._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=1.9561 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.ffn.fc2._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.3423 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.ffn.fc2._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=1.5352 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.query._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=6.6289 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.query._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3071 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.query._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.3535 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.key._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=6.6289 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.key._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.3071 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.key._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.3535 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.value._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=6.6289 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.value._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3071 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.value._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.3535 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.out._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.6069 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.out._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.1541 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.out._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.4648 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.matmul_q_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.3574 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.matmul_k_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.3574 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.matmul_v_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.3574 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.matmul_a_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.0494 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.attn.softmax_input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=52.9375 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.5.layernorm_input1_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.5.add1_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.5.add1_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.5.layernorm_input2_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.5.add2_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.5.add2_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.6.ffn.fc1._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=3.9941 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.ffn.fc1._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.6050 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.ffn.fc1._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=4.2578 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.ffn.fc2._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=1.4102 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.ffn.fc2._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.2649 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.ffn.fc2._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.7861 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.query._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=8.3516 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.query._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3149 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.query._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.7988 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.key._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=8.3516 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.key._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.3149 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.key._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.7988 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.value._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=8.3516 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.value._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3149 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.value._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=3.7988 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.out._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.6377 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.out._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.2002 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.out._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.6436 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.matmul_q_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.8027 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.matmul_k_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.8027 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.matmul_v_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.8027 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.matmul_a_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.0474 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.attn.softmax_input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=56.7812 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.6.layernorm_input1_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.6.add1_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.6.add1_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.6.layernorm_input2_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.6.add2_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.6.add2_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.7.ffn.fc1._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=4.3242 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.ffn.fc1._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.7212 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.ffn.fc1._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=4.5156 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.ffn.fc2._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=1.8926 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.ffn.fc2._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.6094 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.ffn.fc2._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.7695 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.query._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=8.6953 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.query._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3098 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.query._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=4.3203 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.key._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=8.6953 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.key._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.3098 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.key._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.3203 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.value._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=8.6953 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.value._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3098 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.value._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=4.3203 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.out._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.5459 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.out._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.1675 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.out._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.4624 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.matmul_q_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.3320 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.matmul_k_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.3320 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.matmul_v_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.3320 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.matmul_a_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.0734 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.attn.softmax_input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=66.3750 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.7.layernorm_input1_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.7.add1_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.7.add1_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.7.layernorm_input2_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.7.add2_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.7.add2_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.8.ffn.fc1._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=3.9375 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.ffn.fc1._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.3726 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.ffn.fc1._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=5.3125 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.ffn.fc2._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=2.8262 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.ffn.fc2._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.3438 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.ffn.fc2._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=1.3867 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.query._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=8.7266 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.query._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3306 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.query._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=4.7695 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.key._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=8.7266 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.key._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.3306 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.key._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.7695 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.value._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=8.7266 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.value._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3306 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.value._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=4.7695 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.out._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=1.9736 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.out._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.1719 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.out._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.6387 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.matmul_q_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.7812 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.matmul_k_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.7812 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.matmul_v_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.7812 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.matmul_a_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.0889 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.attn.softmax_input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=65.1875 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.8.layernorm_input1_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.8.add1_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.8.add1_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.8.layernorm_input2_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.8.add2_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.8.add2_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.9.ffn.fc1._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=3.6289 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.ffn.fc1._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.3835 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.ffn.fc1._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=4.7539 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.ffn.fc2._input_quantizer                             TensorQuantizer(8bit fake per-tensor amax=3.0391 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.ffn.fc2._weight_quantizer                            TensorQuantizer(8bit fake per-tensor amax=0.3914 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.ffn.fc2._aftergemm_quantizer                         TensorQuantizer(8bit fake per-tensor amax=6.1250 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.query._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=6.8477 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.query._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3450 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.query._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=4.8164 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.key._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=6.8477 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.key._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.3450 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.key._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.8164 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.value._input_quantizer                          TensorQuantizer(8bit fake per-tensor amax=6.8477 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.value._weight_quantizer                         TensorQuantizer(8bit fake per-tensor amax=0.3450 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.value._aftergemm_quantizer                      TensorQuantizer(8bit fake per-tensor amax=4.8164 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.out._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=1.2549 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.out._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.1643 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.out._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.9829 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.matmul_q_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.8398 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.matmul_k_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.8398 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.matmul_v_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.8398 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.matmul_a_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.1234 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.attn.softmax_input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=70.8750 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.9.layernorm_input1_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.9.add1_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.9.add1_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.9.layernorm_input2_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.9.add2_local_input_quantizer                           TensorQuantizer(disabled)
+transformer.encoder.layer.9.add2_residual_input_quantizer                        TensorQuantizer(disabled)
+transformer.encoder.layer.10.ffn.fc1._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=3.7695 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.ffn.fc1._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.4631 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.ffn.fc1._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=5.1289 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.ffn.fc2._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=2.7949 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.ffn.fc2._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.5044 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.ffn.fc2._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=3.9141 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.query._input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=5.6992 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.query._weight_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.2988 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.query._aftergemm_quantizer                     TensorQuantizer(8bit fake per-tensor amax=4.8281 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.key._input_quantizer                           TensorQuantizer(8bit fake per-tensor amax=5.6992 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.key._weight_quantizer                          TensorQuantizer(8bit fake per-tensor amax=0.2988 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.key._aftergemm_quantizer                       TensorQuantizer(8bit fake per-tensor amax=4.8281 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.value._input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=5.6992 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.value._weight_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.2988 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.value._aftergemm_quantizer                     TensorQuantizer(8bit fake per-tensor amax=4.8281 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.out._input_quantizer                           TensorQuantizer(8bit fake per-tensor amax=3.5625 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.out._weight_quantizer                          TensorQuantizer(8bit fake per-tensor amax=0.1990 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.out._aftergemm_quantizer                       TensorQuantizer(8bit fake per-tensor amax=0.9209 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.matmul_q_input_quantizer                       TensorQuantizer(8bit fake per-tensor amax=4.8320 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.matmul_k_input_quantizer                       TensorQuantizer(8bit fake per-tensor amax=4.8320 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.matmul_v_input_quantizer                       TensorQuantizer(8bit fake per-tensor amax=4.8320 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.matmul_a_input_quantizer                       TensorQuantizer(8bit fake per-tensor amax=0.0746 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.attn.softmax_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=200.2500 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.10.layernorm_input1_quantizer                          TensorQuantizer(disabled)
+transformer.encoder.layer.10.add1_local_input_quantizer                          TensorQuantizer(disabled)
+transformer.encoder.layer.10.add1_residual_input_quantizer                       TensorQuantizer(disabled)
+transformer.encoder.layer.10.layernorm_input2_quantizer                          TensorQuantizer(disabled)
+transformer.encoder.layer.10.add2_local_input_quantizer                          TensorQuantizer(disabled)
+transformer.encoder.layer.10.add2_residual_input_quantizer                       TensorQuantizer(disabled)
+transformer.encoder.layer.11.ffn.fc1._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=3.8945 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.ffn.fc1._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.4395 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.ffn.fc1._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=5.6953 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.ffn.fc2._input_quantizer                            TensorQuantizer(8bit fake per-tensor amax=2.2480 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.ffn.fc2._weight_quantizer                           TensorQuantizer(8bit fake per-tensor amax=0.5142 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.ffn.fc2._aftergemm_quantizer                        TensorQuantizer(8bit fake per-tensor amax=4.9062 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.query._input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=3.7637 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.query._weight_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.3125 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.query._aftergemm_quantizer                     TensorQuantizer(8bit fake per-tensor amax=4.6250 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.key._input_quantizer                           TensorQuantizer(8bit fake per-tensor amax=3.7637 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.key._weight_quantizer                          TensorQuantizer(8bit fake per-tensor amax=0.3125 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.key._aftergemm_quantizer                       TensorQuantizer(8bit fake per-tensor amax=4.6250 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.value._input_quantizer                         TensorQuantizer(8bit fake per-tensor amax=3.7637 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.value._weight_quantizer                        TensorQuantizer(8bit fake per-tensor amax=0.3125 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.value._aftergemm_quantizer                     TensorQuantizer(8bit fake per-tensor amax=4.6250 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.out._input_quantizer                           TensorQuantizer(8bit fake per-tensor amax=3.5176 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.out._weight_quantizer                          TensorQuantizer(8bit fake per-tensor amax=0.2947 calibrator=MaxCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.out._aftergemm_quantizer                       TensorQuantizer(8bit fake per-tensor amax=2.5801 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.matmul_q_input_quantizer                       TensorQuantizer(8bit fake per-tensor amax=4.6211 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.matmul_k_input_quantizer                       TensorQuantizer(8bit fake per-tensor amax=4.6211 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.matmul_v_input_quantizer                       TensorQuantizer(8bit fake per-tensor amax=4.6211 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.matmul_a_input_quantizer                       TensorQuantizer(8bit fake per-tensor amax=0.0614 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.attn.softmax_input_quantizer                        TensorQuantizer(8bit fake per-tensor amax=287.0000 calibrator=HistogramCalibrator scale=1.0 quant)
+transformer.encoder.layer.11.layernorm_input1_quantizer                          TensorQuantizer(disabled)
+transformer.encoder.layer.11.add1_local_input_quantizer                          TensorQuantizer(disabled)
+transformer.encoder.layer.11.add1_residual_input_quantizer                       TensorQuantizer(disabled)
+transformer.encoder.layer.11.layernorm_input2_quantizer                          TensorQuantizer(disabled)
+transformer.encoder.layer.11.add2_local_input_quantizer                          TensorQuantizer(disabled)
+transformer.encoder.layer.11.add2_residual_input_quantizer                       TensorQuantizer(disabled)
+         276/         348 ( 79.31%) TensorQuantizers enabled
+    84934656/    97619072 ( 87.01%) Quantized weights
+          88/    97619072 (  0.00%) Zero weights
+    97619072/    98185797 ( 99.42%) Weight parameters
+
+
+
+Eval batchsize 64
+[04/15/2023-03:51:08] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +8, now: CPU 793, GPU 2401 (MiB)
+[04/15/2023-03:51:08] [TRT] [I] [MemUsageChange] Init cuDNN: CPU +0, GPU +8, now: CPU 793, GPU 2409 (MiB)
+[WARNING] igemm.config is not found; using default GEMM algo
+[04/15/2023-03:51:09] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +54, now: CPU 0, GPU 54 (MiB)
+(64, 577, 768)
